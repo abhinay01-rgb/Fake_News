@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}QnA Website{% endblock %}
+{% block content %}
+<form action="{% url 'news' %}" method="get" id="searchForm">
+    <b><label for="keywords">Enter your query:</label></b>
+    <input type="text" name="keywords" id="keywords" placeholder="Type keywords here">
+    <button class="btn btn-primary" type="submit">Search</button>
+</form>
+{% if results %}
+    <h2 class="btn btn-success">Results</h2>
+    <ul>
+        {% for article in results %}
+            <li>
+                <strong>Headline:</strong> {{ article.headline }}<br>
+                <strong>Source:</strong> {{ article.source }}<br>
+                <strong>Similarity:</strong> {{ article.similarity }}%<br><br>
+                <strong>Content:</strong> {{ article.content }}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No results found.</p>
+{% endif %}
+{% endblock %}
